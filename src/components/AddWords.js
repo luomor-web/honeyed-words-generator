@@ -160,8 +160,7 @@ export default function AddLoveWords() {
     <>
       <Modal visible={expand} />
       <StyledBtnWrapper>
-        <AddButton className={`${expand ? 'close' : ''} visible`} onClick={handleClick}></AddButton>
-        <div className={`tip ${expand ? 'hidden' : ''}`}>👈贡献情话</div>
+
       </StyledBtnWrapper>
     </>
   );

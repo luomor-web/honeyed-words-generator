@@ -137,11 +137,7 @@ export default function ShareQR() {
     <>
       <Modal visible={expand} />
       <StyledBtnWrapper>
-        <ShareButton
-          className={`${expand ? 'close' : ''} visible`}
-          onClick={handleClick}
-        ></ShareButton>
-        <div className="tip">分享这句话 👉</div>
+
       </StyledBtnWrapper>
     </>
   );

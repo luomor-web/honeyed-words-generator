@@ -11,7 +11,7 @@ console.log('process env', process.env);
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
   // 开发环境从根目录 .env.development.local 读取
-  const token = process.env.REACT_APP_TOKEN || '';
+  const token = process.env.REACT_APP_TOKEN || 'test';
   // const token = localStorage.getItem('AUTH_TOKEN');
   // return the headers to the context so httpLink can read them
   return {

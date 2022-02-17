@@ -114,8 +114,6 @@ export default function InfoModal() {
   return (
     <>
       <Modal visible={visible} />
-
-      <InfoButton className={`${visible ? 'close' : ''}`} onClick={handleInfoClick}></InfoButton>
     </>
   );
 }

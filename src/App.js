@@ -46,9 +46,9 @@ const App = () => {
         extensions: { code }
       } = graphQLErrors[0];
       if (code == 'access-denied') {
-        alert('缺少token，无权访问');
+        //alert('缺少token，无权访问');
       } else {
-        alert('接口报错了，请联系作者，VX:yanggc_2018');
+        //alert('接口报错了，请联系作者，VX:yanggc_2018');
       }
     }
   }, [error]);
