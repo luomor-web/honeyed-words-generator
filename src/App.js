@@ -6,7 +6,7 @@ import { useQuery } from '@apollo/client';
 import { getQueryValue } from './utils';
 import Loading from './components/Loading';
 import AddWords from './components/AddWords';
-// import Words from './assets/words';
+import Words from './assets/words';
 
 // const Card = lazy(() => import('./components/Card'));
 const Card = lazy(() => import('./components/Card'));
@@ -46,15 +46,22 @@ const App = () => {
         extensions: { code }
       } = graphQLErrors[0];
       if (code == 'access-denied') {
-        //alert('缺少token，无权访问');
+        console.log('缺少token，无权访问');
       } else {
-        //alert('接口报错了，请联系作者，VX:yanggc_2018');
+        console.log('no api');
       }
     }
   }, [error]);
   useEffect(() => {
     if (data) {
       let wordArr = data.love_words.map((w) => w.content);
+      setWords(wordArr);
+      console.log({ wordArr });
+
+      let count = wordsIdx !== '' ? wordArr[wordsIdx].length : 0;
+      setWordCount(count);
+    } else {
+      let wordArr = Words;
       setWords(wordArr);
       console.log({ wordArr });
 
