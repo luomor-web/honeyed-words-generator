@@ -3,7 +3,7 @@
   <h1>甜(Tu)言(Wei)蜜(Qing)语(Hua)</h1>
 </div>
 
-土味情话，在线生成：[https://works.yangerxiao.com/honeyed-words-generator/](https://works.yangerxiao.com/honeyed-words-generator/)
+土味情话，在线生成：[https://games.luomor.com/sweet-words/](https://games.luomor.com/sweet-words/)
 
 ## 应用截图
 
@@ -35,7 +35,7 @@ P.S. `|`代表换行
 
 ## 本地开发
 
-`git clone https://github.com/zerosoul/honeyed-words-generator.git`
+`git clone https://github.com/luomor-web/honeyed-words-generator.git`
 
 `cd honeyed-words-generator && yarn install`
 

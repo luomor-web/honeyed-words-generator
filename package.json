@@ -5,7 +5,7 @@
   "main": "main.jsx",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zerosoul/honeyed-words-generator.git"
+    "url": "git+https://github.com/luomor-web/honeyed-words-generator.git"
   },
   "keywords": [
     "css3",
@@ -15,12 +15,12 @@
     "tool",
     "love"
   ],
-  "author": "tristan",
+  "author": "Peter Zhang",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/zerosoul/honeyed-words-generator/issues"
+    "url": "https://github.com/luomor-web/honeyed-words-generator/issues"
   },
-  "homepage": "https://honey.yangerxiao.com",
+  "homepage": "https://games.luomor.com/sweet-words",
   "dependencies": {
     "file-saver": "^2.0.5",
     "html2canvas": "^1.4.1",

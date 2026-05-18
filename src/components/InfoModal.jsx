@@ -77,7 +77,7 @@ const Modal = ({ visible = false }) => (
     <div className="line title">土味情话在线生成器</div>
     <div className="line github">
       <GitHubButton
-        href="https://github.com/zerosoul/honeyed-words-generator"
+        href="https://github.com/luomor-web/honeyed-words-generator"
         data-color-scheme="no-preference: light; light: light; dark: dark;"
         data-icon="octicon-star"
         data-size="large"
@@ -87,7 +87,7 @@ const Modal = ({ visible = false }) => (
         Star
       </GitHubButton>
       <GitHubButton
-        href="https://github.com/zerosoul/honeyed-words-generator/fork"
+        href="https://github.com/luomor-web/honeyed-words-generator/fork"
         data-color-scheme="no-preference: light; light: light; dark: dark;"
         data-icon="octicon-repo-forked"
         data-size="large"
@@ -102,8 +102,8 @@ const Modal = ({ visible = false }) => (
     </div>
     <div className="copyright">
       <span> Copyright © {new Date().getFullYear()} By </span>
-      <a rel="noopener noreferrer" href="https://yangerxiao.com" target="_blank">
-        Tristan
+      <a rel="noopener noreferrer" href="https://www.luomor.com" target="_blank">
+        烙馍网
       </a>
     </div>
   </StyledModal>
