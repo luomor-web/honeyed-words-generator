@@ -23,7 +23,6 @@ const authLink = setContext((_, { headers }) => {
 });
 
 const client = new ApolloClient({
-  link: authLink.concat(new HttpLink({ uri: 'https://g.yangerxiao.com/v1/graphql' })),
   cache: new InMemoryCache()
 });
 ReactDOM.render(
