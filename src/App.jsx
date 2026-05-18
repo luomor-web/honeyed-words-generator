@@ -1,11 +1,8 @@
-import { lazy, Suspense, useEffect, useState } from 'react';
+import { lazy, Suspense, useState } from 'react';
 import styled from 'styled-components';
-import { LoveWords } from './opts.gql';
-import { useQuery } from '@apollo/client';
 
 import { getQueryValue } from './utils';
 import Loading from './components/Loading';
-import AddWords from './components/AddWords';
 import Words from './assets/words';
 
 // const Card = lazy(() => import('./components/Card'));
@@ -30,45 +27,10 @@ const MetooButton = styled(StartButton)`
 const wordsIdx = getQueryValue('idx');
 const hasWords = wordsIdx !== '';
 const App = () => {
-  const { data, error } = useQuery(LoveWords);
-  const [words, setWords] = useState([]);
-  const [wordCount, setWordCount] = useState(0);
+  let count = wordsIdx !== '' ? Words[wordsIdx].length : 0;
 
   const [start, setStart] = useState(hasWords);
   const [loading, setLoading] = useState(!hasWords);
-  console.log({ data });
-  useEffect(() => {
-    if (error) {
-      const { graphQLErrors } = error;
-      console.log({ graphQLErrors });
-
-      const {
-        extensions: { code }
-      } = graphQLErrors[0];
-      if (code == 'access-denied') {
-        console.log('缺少token，无权访问');
-      } else {
-        console.log('no api');
-      }
-    }
-  }, [error]);
-  useEffect(() => {
-    if (data) {
-      let wordArr = data.love_words.map((w) => w.content);
-      setWords(wordArr);
-      console.log({ wordArr });
-
-      let count = wordsIdx !== '' ? wordArr[wordsIdx].length : 0;
-      setWordCount(count);
-    } else {
-      let wordArr = Words;
-      setWords(wordArr);
-      console.log({ wordArr });
-
-      let count = wordsIdx !== '' ? wordArr[wordsIdx].length : 0;
-      setWordCount(count);
-    }
-  }, [data]);
   const handleStart = () => {
     setStart(true);
     setLoading(true);
@@ -84,15 +46,14 @@ const App = () => {
     <Suspense fallback={<Loading />}>
       {!hasWords && <InfoModal />}
       {start && !loading && !hasWords && <ShareQR />}
-      {!loading && !hasWords && <AddWords />}
       <RefreshButton visible={start && !loading && !hasWords} handleUpdate={handleUpdate} />
       <SaveButton visible={start && !loading && !hasWords} />
       {!start && <Header handleStart={handleStart} />}
       <LoadingWords visible={start && loading} handleDone={handleDone} />
-      <Card wordArr={words} wordsIdx={wordsIdx} visible={start && !loading} />
+      <Card wordArr={Words} wordsIdx={wordsIdx} visible={start && !loading} />
       {start && !loading && hasWords && (
         <MetooButton
-          wordCount={wordCount}
+          wordCount={count}
           onClick={() => {
             location.href = location.href.split('?')[0];
           }}

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import CodeQR from 'qrcode.react';
+import { QRCodeSVG } from 'qrcode.react';
 
 import { getQueryValue, shuffle } from '../utils';
 import ImageLogo from '../assets/img/logo.png';
@@ -184,29 +184,32 @@ export default function Card({ wordArr = [], visible = false }) {
   return (
     <StyledWrapper className={visible ? 'visible' : 'hidden'}>
       <div id="HONEYED_WORDS_CARD" className={`card`}>
-        {words.split('|').map((line, lineIdx) => {
-          let ws = line.split('');
-          console.log({ ws });
+        {words
+          .replaceAll(' ', '')
+          .split('|')
+          .map((line, lineIdx) => {
+            let ws = line.split('');
+            console.log({ ws });
 
-          if (lineIdx !== 0) {
-            wordCount = wordCount + words.split('|')[lineIdx - 1].length;
-          }
-          return (
-            <p className="line" key={line}>
-              {ws.map((w, idx) => {
-                return w !== '' ? (
-                  <WordBox
-                    style={{ animationDelay: `${0.2 * (wordCount + idx)}s` }}
-                    className="word"
-                    key={`${w}-${idx}`}
-                  >
-                    {w}
-                  </WordBox>
-                ) : null;
-              })}
-            </p>
-          );
-        })}
+            if (lineIdx !== 0) {
+              wordCount = wordCount + words.split('|')[lineIdx - 1].length;
+            }
+            return (
+              <p className="line" key={line}>
+                {ws.map((w, idx) => {
+                  return w !== '' ? (
+                    <WordBox
+                      style={{ animationDelay: `${0.2 * (wordCount + idx)}s` }}
+                      className="word"
+                      key={`${w}-${idx}`}
+                    >
+                      {w}
+                    </WordBox>
+                  ) : null;
+                })}
+              </p>
+            );
+          })}
         {[1, 2, 3, 4, 5].map((num, idx) => (
           <img
             style={{ animationDelay: `${idx * 0.3}s` }}
@@ -217,14 +220,13 @@ export default function Card({ wordArr = [], visible = false }) {
           />
         ))}
         <div className="dbg qr">
-          <CodeQR
-            renderAs="svg"
+          <QRCodeSVG
             imageSettings={{ width: 10, height: 10, src: ImageLogo, excavate: true }}
             size={50}
             bgColor="#f2f2f2"
             level="Q"
             fgColor="#000"
-            includeMargin={false}
+            marginSize={0}
             value={`${window.location.href.split('?')[0]}`}
           />
           <div className="tip">土味情话</div>

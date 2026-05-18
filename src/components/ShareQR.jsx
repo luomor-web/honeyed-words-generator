@@ -1,18 +1,21 @@
 /* eslint-disable react/jsx-no-target-blank */
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import CodeQR from 'qrcode.react';
+import { QRCodeCanvas } from 'qrcode.react';
 import html2canvas from 'html2canvas';
 
 import StyledButton from './StyledButton';
-import ImageShare from '../assets/img/share.svg';
 import ImageLogo from '../assets/img/logo.png';
-import ImageClose from '../assets/img/close.svg';
-import { AniFadeIn, AniSlideInUp } from './animates';
+import { AniSlideInUp } from './animates';
+import { MdClose, MdShare } from 'react-icons/md';
 const ShareButton = styled(StyledButton)`
-  background-image: url(${ImageShare});
-  &.close {
-    background-image: url(${ImageClose});
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  > svg {
+    width: 28px;
+    height: 28px;
   }
 `;
 const StyledBtnWrapper = styled.div`
@@ -21,17 +24,6 @@ const StyledBtnWrapper = styled.div`
   right: 1rem;
   top: 1rem;
   margin-right: 0.5rem;
-  .tip {
-    position: absolute;
-    left: -4.8rem;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 0.6rem;
-    background: rgba(2, 2, 2, 0.6);
-    padding: 0.3rem;
-    animation: ${AniFadeIn} 1s ease alternate;
-    animation-iteration-count: 8;
-  }
 `;
 const StyledModal = styled.section`
   z-index: 998;
@@ -62,6 +54,9 @@ const StyledModal = styled.section`
     position: relative;
     .img {
       padding-bottom: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       svg {
         width: 100% !important;
         height: 100% !important;
@@ -88,7 +83,7 @@ const Modal = ({ visible = false }) => {
     const qrEle = document.querySelector('#QR_DOWNLOAD');
     if (visible) {
       html2canvas(qrEle, {
-        debug: process.env.NODE_ENV !== 'production',
+        debug: import.meta.env.DEV,
         onclone: (doc) => {
           let tmp = doc.querySelector('#QR_DOWNLOAD');
           tmp.classList.remove('hidden');
@@ -107,11 +102,10 @@ const Modal = ({ visible = false }) => {
 
   return (
     <StyledModal className={visible ? 'visible' : 'hidden'}>
-      <div className="title">👇长按或右键保存，发朋友圈或发给TA表白👇</div>
+      <div className="title">👇长按或右键保存，发朋友圈或发给 TA 表白👇</div>
       <div className="qr hidden" id="QR_DOWNLOAD">
         <div className="img">
-          <CodeQR
-            renderAs="canvas"
+          <QRCodeCanvas
             imageSettings={{ width: 30, height: 30, src: ImageLogo, excavate: true }}
             size={256}
             bgColor="#fff"
@@ -137,7 +131,9 @@ export default function ShareQR() {
     <>
       <Modal visible={expand} />
       <StyledBtnWrapper>
-
+        <ShareButton className={`${expand ? 'close' : ''} visible`} onClick={handleClick}>
+          {expand ? <MdClose /> : <MdShare />}
+        </ShareButton>
       </StyledBtnWrapper>
     </>
   );
